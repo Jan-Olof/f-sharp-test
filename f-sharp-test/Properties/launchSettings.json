@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "f-sharp-test": {
+      "commandName": "Project",
+      "commandLineArgs": "Hello world from F#!"
+    }
+  }
+}
