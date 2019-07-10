@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Script1.fsx" />
     <None Include="Scratchpad.fsx" />
+    <None Include="Script1.fsx" />
+    <None Include="4-WebBrowserForm.fsx" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
