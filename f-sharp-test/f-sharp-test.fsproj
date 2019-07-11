@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Scratchpad.fsx" />
-    <None Include="Script1.fsx" />
-    <None Include="4-WebBrowserForm.fsx" />
+    <None Include="scripts\Scratchpad.fsx" />
+    <None Include="scripts\Script1.fsx" />
+    <None Include="scripts\4-WebBrowserForm.fsx" />
+    <None Include="scripts\5-compiler.fsx" />
     <Compile Include="Program.fs" />
   </ItemGroup>
-
-  <ItemGroup />
 
 </Project>
