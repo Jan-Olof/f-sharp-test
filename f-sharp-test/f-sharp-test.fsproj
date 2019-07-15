@@ -12,6 +12,7 @@
     <None Include="scripts\4-WebBrowserForm.fsx" />
     <None Include="scripts\5-compiler.fsx" />
     <None Include="scripts\6.fsx" />
+    <None Include="scripts\7.fsx" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
