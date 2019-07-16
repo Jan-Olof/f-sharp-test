@@ -17,3 +17,19 @@ getDistance("Home") = 25
 getDistance("Office") = 50
 
 calcRemainingPetrol(100, 125)
+
+let distanceToGas = getDistance("Gas")
+calcRemainingPetrol(25, distanceToGas)
+calcRemainingPetrol(5, distanceToGas)
+
+let fill(destination) =
+    if destination = "Gas" then 50
+    else 0
+
+let driveTo(petrol, destination) =
+    let distance = getDistance destination
+    calcRemainingPetrol(petrol, distance) + fill(destination)
+
+let start = 111
+let x1 = driveTo(start, "Stadium")
+let x2 = driveTo(x1, "Gas")
