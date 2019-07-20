@@ -13,6 +13,7 @@
     <None Include="scripts\7.fsx" />
     <Compile Include="scripts\9-tuples.fsx" />
     <None Include="scripts\10-records.fsx" />
+    <None Include="scripts\11.fsx" />
     <None Include="scripts\Scratchpad.fsx" />
     <None Include="scripts\random.fsx" />
     <Compile Include="Program.fs" />
