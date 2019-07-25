@@ -8,7 +8,7 @@ let greeting = greetPerson "Fred" 25
 
 let int2String (x: int) = string x
 
-open System.IO // Name spaces can be opened just as modules
+open System.IO
 let countWords (text:string) =
     let x = text.Split ' '
     File.WriteAllText(@"d:\test.txt", "Text: " + text + ". Words: " +  int2String x.Length)
