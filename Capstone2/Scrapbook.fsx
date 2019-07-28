@@ -48,3 +48,15 @@ let console account message =
     printfn "Account %s: %s" (account.Id.ToString()) message
 
 console acc1 "Testing without meaning"
+
+/// Runs some account operation such as withdraw or deposit with auditing.
+let auditAs operationName audit operation amount account =
+    let newAccount = operation amount account
+
+    if account.Balance = newAccount.Balance then audit account (sprintf "%s failed" operationName)
+    else audit account (sprintf "%s %.2M" operationName amount)
+
+    newAccount
+
+let withdrawConsoleAudit = auditAs "withdraw" console withdraw 10m acc2
+let depositConsoleAudit = auditAs "deposit" console deposit 10m acc2
