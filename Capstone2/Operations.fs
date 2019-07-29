@@ -20,11 +20,12 @@ let withdraw amount account : Account =
 /// Runs some account operation such as withdraw or deposit with auditing.
 let auditAs operationName audit operation amount account =
 
+    audit account (sprintf "Performing a %s operation for %.2M..." operationName amount)
     let newAccount = operation amount account
 
     if account.Balance = newAccount.Balance then
-        audit account (sprintf "%s failed" operationName)
+        audit account (sprintf "Transaction %s rejected!" operationName)
     else
-        audit account (sprintf "%s %.2M" operationName amount)
+        audit account (sprintf "Transaction accepted! Balance is now %.2M." newAccount.Balance)
 
     newAccount
