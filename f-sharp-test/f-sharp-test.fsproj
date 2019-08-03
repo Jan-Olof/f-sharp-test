@@ -17,6 +17,7 @@
     <None Include="scripts\11-pipeline.fsx" />
     <None Include="scripts\13.fsx" />
     <None Include="scripts\15-collections.fsx" />
+    <None Include="scripts\18-fold.fsx" />
     <None Include="scripts\Scratchpad.fsx" />
     <None Include="scripts\random.fsx" />
     <Compile Include="Program.fs" />
