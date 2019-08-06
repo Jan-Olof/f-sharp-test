@@ -19,10 +19,23 @@ let getAmount (command) =
     elif command = 'w' then ('w', 25M)
     else ('x', 0M)
 
-let processCommand (account) (command, amount) =
-    if command = 'w' then account |> withdraw amount
-    elif command = 'd' then account |> deposit amount
-    else account
+let getAmountConsole (command) =
+    if command = 'x' then ('x', 0M)
+    else
+        Console.Write "Enter amount: "
+        let money = Console.ReadLine()
+
+        if command = 'd' then (command, (Decimal.Parse money))
+        elif command = 'w' then (command, (Decimal.Parse money))
+        else (command, 0M)
+
+let processCommand account (command, amount) =
+    printfn ""
+    let account =
+        if command = 'd' then account |> deposit amount
+        else account |> withdraw amount
+    printfn "Current balance is £%M" account.Balance
+    account
 
 [<EntryPoint>]
 let main _ =
@@ -37,11 +50,17 @@ let main _ =
 
     let commands = ['d'; 'w'; 'z'; 'f'; 'd'; 'x'; 'w']
 
+    let consoleCommands =
+        seq {
+            while true do
+            Console.Write "(d)eposit, (w)ithdraw or e(x)it: "
+            yield Console.ReadKey().KeyChar }
+
     let closingAccount =
-        commands
+        consoleCommands
         |> Seq.filter isValidCommand
         |> Seq.takeWhile (not << isStopCommand)
-        |> Seq.map getAmount
+        |> Seq.map getAmountConsole
         |> Seq.fold processCommand openingAccount
 
     //let closingAccount =
