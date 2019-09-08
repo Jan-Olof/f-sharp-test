@@ -22,7 +22,7 @@ let getAmount (command) =
 let getAmountConsole (command) =
     if command = 'x' then ('x', 0M)
     else
-        Console.Write "Enter amount: "
+        Console.Write "\nEnter amount: "
         let money = Console.ReadLine()
 
         if command = 'd' then (command, (Decimal.Parse money))
@@ -43,12 +43,12 @@ let main _ =
         Console.Write "Please enter your name: "
         Console.ReadLine()
 
-    let withdrawWithAudit = auditAs "withdraw" Auditing.composedLogger withdraw
-    let depositWithAudit = auditAs "deposit" Auditing.composedLogger deposit
+    // let withdrawWithAudit = auditAs "withdraw" Auditing.composedLogger withdraw
+    // let depositWithAudit = auditAs "deposit" Auditing.composedLogger deposit
 
     let openingAccount = { Owner = { Name = name }; Balance = 0M; AccountId = Guid.Empty }
 
-    let commands = ['d'; 'w'; 'z'; 'f'; 'd'; 'x'; 'w']
+    // let commands = ['d'; 'w'; 'z'; 'f'; 'd'; 'x'; 'w']
 
     let consoleCommands =
         seq {
@@ -62,10 +62,6 @@ let main _ =
         |> Seq.takeWhile (not << isStopCommand)
         |> Seq.map getAmountConsole
         |> Seq.fold processCommand openingAccount
-
-    //let closingAccount =
-    //    // Fill in the main loop here...
-    //    openingAccount
 
     Console.Clear()
     printfn "Closing Balance:\r\n %A" closingAccount
