@@ -4,37 +4,58 @@ open System
 open Capstone3.Domain
 open Capstone3.Operations
 
+let withdrawWithAudit =
+    auditAs "withdraw" Auditing.composedLogger withdraw
+let depositWithAudit =
+    auditAs "deposit" Auditing.composedLogger deposit
+
 let isStopCommand (command) =
-    if command = 'x' then true
-    else false
+    if command = 'x' then
+        true
+    else
+        false
 
 let isValidCommand (command) =
-    if command = 'w' then true
-    elif command = 'd' then true
-    elif isStopCommand command then true
-    else false
+    if command = 'w' then
+        true
+    elif command = 'd' then
+        true
+    elif isStopCommand command then
+        true
+    else
+        false
 
 let getAmount (command) =
-    if command = 'd' then ('d', 50M)
-    elif command = 'w' then ('w', 25M)
-    else ('x', 0M)
+    if command = 'd' then
+        ('d', 50M)
+    elif command = 'w' then
+        ('w', 25M)
+    else
+        ('x', 0M)
 
 let getAmountConsole (command) =
-    if command = 'x' then ('x', 0M)
+    if command = 'x' then
+        ('x', 0M)
     else
         Console.Write "\nEnter amount: "
         let money = Console.ReadLine()
 
-        if command = 'd' then (command, (Decimal.Parse money))
-        elif command = 'w' then (command, (Decimal.Parse money))
-        else (command, 0M)
+        if command = 'd' then
+            (command, (Decimal.Parse money))
+        elif command = 'w' then
+            (command, (Decimal.Parse money))
+        else
+            (command, 0M)
 
 let processCommand account (command, amount) =
     printfn ""
     let account =
-        if command = 'd' then account |> deposit amount
-        else account |> withdraw amount
-    printfn "Current balance is £%M" account.Balance
+        if command = 'd' then
+            account |> depositWithAudit amount
+        else
+            account |> withdrawWithAudit amount
+
+    printfn "Current balance is €%M" account.Balance
     account
 
 [<EntryPoint>]
@@ -43,12 +64,12 @@ let main _ =
         Console.Write "Please enter your name: "
         Console.ReadLine()
 
-    // let withdrawWithAudit = auditAs "withdraw" Auditing.composedLogger withdraw
-    // let depositWithAudit = auditAs "deposit" Auditing.composedLogger deposit
-
-    let openingAccount = { Owner = { Name = name }; Balance = 0M; AccountId = Guid.Empty }
-
-    // let commands = ['d'; 'w'; 'z'; 'f'; 'd'; 'x'; 'w']
+    let openingAccount =
+        {
+            Owner = { Name = name };
+            Balance = 0M;
+            AccountId = Guid.Empty
+        }
 
     let consoleCommands =
         seq {

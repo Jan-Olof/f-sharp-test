@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Domain.fs" />
+    <Compile Include="Domain\Customer.fs" />
+    <Compile Include="Domain\Account.fs" />
+    <Compile Include="Domain\Transaction.fs" />
+    <Compile Include="Domain\Transactions.fs" />
     <Compile Include="Operations.fs" />
     <Compile Include="FileRepository.fs" />
     <Compile Include="Auditing.fs" />
