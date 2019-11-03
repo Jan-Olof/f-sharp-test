@@ -1,6 +1,5 @@
 ﻿module Capstone3.Auditing
 
-open Capstone3.Domain
 open Capstone3.Domain.Transactions
 
 /// Logs to the console

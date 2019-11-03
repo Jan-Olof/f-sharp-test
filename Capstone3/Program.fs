@@ -29,14 +29,6 @@ let isValidCommand (command) =
     else
         false
 
-let getAmount (command) =
-    if command = 'd' then
-        ('d', 50M)
-    elif command = 'w' then
-        ('w', 25M)
-    else
-        ('x', 0M)
-
 let getAmountConsole (command) =
     if command = 'x' then
         ('x', 0M)

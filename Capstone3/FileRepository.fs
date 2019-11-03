@@ -40,6 +40,7 @@ let loadTransactions (folder:string) =
 let findTransactionsOnDisk owner =
     let folder = findAccountFolder owner
 
-    if String.IsNullOrEmpty folder
-    then owner, Guid.NewGuid(), Seq.empty
-    else loadTransactions folder
+    if String.IsNullOrEmpty folder then
+        owner, Guid.NewGuid(), Seq.empty
+    else
+        loadTransactions folder
