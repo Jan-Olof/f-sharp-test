@@ -6,8 +6,12 @@ open Capstone3.Operations
 
 let withdrawWithAudit =
     auditAs "withdraw" Auditing.composedLogger withdraw
+
 let depositWithAudit =
     auditAs "deposit" Auditing.composedLogger deposit
+
+let loadAccountFromDisk =
+    FileRepository.findTransactionsOnDisk >> Operations.loadAccount
 
 let isStopCommand (command) =
     if command = 'x' then
@@ -60,16 +64,11 @@ let processCommand account (command, amount) =
 
 [<EntryPoint>]
 let main _ =
-    let name =
-        Console.Write "Please enter your name: "
-        Console.ReadLine()
-
     let openingAccount =
-        {
-            Owner = { Name = name };
-            Balance = 0M;
-            AccountId = Guid.Empty
-        }
+        Console.Write "Please enter your name: "
+        Console.ReadLine() |> loadAccountFromDisk
+
+    printfn "Current balance is £%M" openingAccount.Balance
 
     let consoleCommands =
         seq {
